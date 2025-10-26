@@ -1,6 +1,5 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 
-import '../../features/auth/data/models/user_model.dart';
 
 class FirestoreService {
   static const String usersCollection = 'users';
