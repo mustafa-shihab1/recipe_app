@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import '../../../../core/resources/assets_manager.dart';
-import '../../../../core/services/firebase_auth_service.dart';
-import '../../../../core/services/firestore_service.dart';
+import '../../../../core/firebase/firebase_auth_service.dart';
+import '../../../../core/firebase/firestore_service.dart';
 import 'main_state.dart';
 
 class MainCubit extends Cubit<MainState> {

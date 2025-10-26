@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 import '../../../../config/dependency_injection.dart';
-import '../../../../core/services/firestore_service.dart';
+import '../../../../core/firebase/firestore_service.dart';
 import '../../../../core/utils/utils.dart';
 import '../../../../core/validators/validators.dart';
 import '../../../main/presentation/view/main_view.dart';
