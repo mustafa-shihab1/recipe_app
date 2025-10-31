@@ -13,6 +13,8 @@ class AssetsManager{
   static const String emailIcon = "$iconsPath/email.png";
   static const String homeIcon = "$iconsPath/home.png";
   static const String searchIcon = "$iconsPath/search.png";
+  static const String exploreIcon = "$iconsPath/explore.png";
+  static const String notificationIcon = "$iconsPath/notification.png";
   static const String favoritesIcon = "$iconsPath/favorites.png";
   static const String profileIcon = "$iconsPath/profile.png";
   static const String savedIcon = "$iconsPath/saved.png";
