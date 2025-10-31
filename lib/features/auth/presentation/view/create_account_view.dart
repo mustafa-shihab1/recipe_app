@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 
 import '../../../../core/device/device_utility.dart';
+import '../../../../core/resources/assets_manager.dart';
 import 'widgets/create_account_bottom_sheet.dart';
 
 class CreateAccountView extends StatelessWidget {
@@ -15,7 +16,7 @@ class CreateAccountView extends StatelessWidget {
           Container(
             decoration: const BoxDecoration(
               image: DecorationImage(
-                image: AssetImage('assets/images/createAccBg.png'),
+                image: AssetImage(AssetsManager.createAccBg),
                 fit: BoxFit.cover,
               ),
             ),

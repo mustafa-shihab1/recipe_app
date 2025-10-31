@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:recipe_app/features/auth/presentation/view/create_account_view.dart';
 
 import '../../../../../core/resources/colors_manager.dart';
+import '../../../../../routes/routes.dart';
 import '../login_view.dart';
 import '../register_view.dart';
 
@@ -37,7 +38,7 @@ class AuthAppBar extends StatelessWidget  implements PreferredSizeWidget {
       actions: [Padding(
         padding: const EdgeInsets.only(right: 16.0),
         child: TextButton(onPressed: (){
-          Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) => switchText=='Register'? RegisterView(): LoginView(),));
+          Navigator.pushReplacementNamed(context, switchText=='Register'? Routes.registerView: Routes.loginView);
         }, child: Text(switchText, style: TextStyle(fontSize: 16,color: Colors.black, fontWeight: FontWeight.bold),)),
       )],
     );

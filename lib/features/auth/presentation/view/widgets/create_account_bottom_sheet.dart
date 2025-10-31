@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 
+import '../../../../../core/resources/assets_manager.dart';
 import '../../../../../core/resources/colors_manager.dart';
-import '../login_view.dart';
-import '../register_view.dart';
+import '../../../../../routes/routes.dart';
 import 'social_media_buttons.dart';
 
 class CreateAccountBottomSheet extends StatelessWidget {
@@ -35,8 +35,7 @@ class CreateAccountBottomSheet extends StatelessWidget {
               width: double.infinity,
               child: ElevatedButton(
                 onPressed: () {
-                  // Replace the current screen with the RegisterView
-                  Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) => RegisterView(),));
+                  Navigator.pushReplacementNamed(context, Routes.registerView);
                 },
                 style: ElevatedButton.styleFrom(
                   padding: const EdgeInsets.symmetric(vertical: 20),
@@ -45,7 +44,7 @@ class CreateAccountBottomSheet extends StatelessWidget {
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
-                    Image.asset('assets/icons/email.png'),
+                    Image.asset(AssetsManager.emailIcon),
                     const SizedBox(width: 5),
                     const Text(
                       'Register using email',
@@ -69,8 +68,7 @@ class CreateAccountBottomSheet extends StatelessWidget {
                 const Text('Have an account? '),
                 GestureDetector(
                   onTap: () {
-                    // Replace the current screen with the LoginView
-                    Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) => LoginView(),));
+                    Navigator.pushReplacementNamed(context, Routes.loginView);
                   },
                   child: Text(
                     'Login',
