@@ -3,6 +3,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 
 import '../../../../core/resources/colors_manager.dart';
 import '../../../../core/widgets/bottom_nav_bar.dart';
+import '../../../addRecipe/presentation/view/add_recipe_view.dart';
 import '../controller/main_cubit.dart';
 import '../controller/main_state.dart';
 
@@ -29,7 +30,9 @@ class MainView extends StatelessWidget {
               backgroundColor: ColorsManager.primaryColor,
               elevation: 4,
               shape: const CircleBorder(),
-              onPressed: () {},
+              onPressed: () {
+                Navigator.push(context, MaterialPageRoute(builder: (context) => AddRecipeView(),));
+              },
               child: const Icon(Icons.add, color: Colors.white),
             ),
             floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,

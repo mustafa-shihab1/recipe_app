@@ -6,6 +6,7 @@ import '../config/dependency_injection.dart';
 import '../core/resources/strings_manager.dart';
 import '../features/auth/presentation/view/login_view.dart';
 import '../features/main/presentation/view/main_view.dart';
+import '../features/search/presentation/view/search_view.dart';
 
 class Routes {
   static const String appStartView = '/app_start_view';
@@ -13,6 +14,7 @@ class Routes {
   static const String registerView = '/register_view';
   static const String mainView = '/main_view';
   static const String homeView = '/home_view';
+  static const String searchView = '/search_view';
   static const String exploreView = '/explore_view';
   static const String favoritesView = '/favorites_view';
   static const String profileView = '/profile_view';
@@ -33,6 +35,9 @@ class RouteGenerator {
       case Routes.mainView:
         initMain();
         return MaterialPageRoute(builder: (_) => const MainView());
+      case Routes.searchView:
+        initSearch();
+        return MaterialPageRoute(builder: (_) => const SearchView());
       default:
         return unDefinedRoute();
     }

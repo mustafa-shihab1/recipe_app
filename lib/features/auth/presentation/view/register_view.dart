@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
-import '../../../../config/dependency_injection.dart';
 import '../../../../core/firebase/firestore_service.dart';
 import '../../../../core/resources/assets_manager.dart';
 import '../../../../core/utils/utils.dart';

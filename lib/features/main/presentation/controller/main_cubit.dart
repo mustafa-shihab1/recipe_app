@@ -1,35 +1,32 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:recipe_app/features/home/presentation/view/home_view.dart';
 import '../../../../core/resources/assets_manager.dart';
-import '../../../../core/firebase/firebase_auth_service.dart';
-import '../../../../core/firebase/firestore_service.dart';
 import 'main_state.dart';
 
 class MainCubit extends Cubit<MainState> {
-  MainCubit(this._authService, this._firestoreService) : super(MainInitial());
+  MainCubit() : super(MainInitial());
 
   final List<Widget> screens = <Widget>[
-    Center(child: Text('Home Page')),
-    Center(child: Text('Search Page')),
-    Center(child: Text('Favorites Page')),
-    Center(child: Text('Profile Page')),
+    const HomeView(),
+    const Center(child: Text('Explore Page'),),
+    const Center(child: Text('Favorites Page')),
+    const Center(child: Text('Profile Page')),
   ];
 
   final List<String> icons = <String>[
     AssetsManager.homeIcon,
-    AssetsManager.searchIcon,
+    AssetsManager.exploreIcon,
     AssetsManager.favoritesIcon,
     AssetsManager.profileIcon,
   ];
 
   final List<String> labels = <String>[
     'Home',
-    'Search',
-    'favorites',
+    'Explore',
+    'Favorites',
     'Profile',
   ];
-  final FirebaseAuthService _authService;
-  final FirestoreService _firestoreService;
 
   void changeBottomNav(int index) {
     emit(MainTabChangedState(index));

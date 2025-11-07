@@ -2,13 +2,17 @@ import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:get_it/get_it.dart';
+import 'package:http/http.dart' as http;
 import 'package:shared_preferences/shared_preferences.dart';
 
 import '../bloc_observer.dart';
 import '../core/firebase/firebase_auth_service.dart';
 import '../core/firebase/firestore_service.dart';
 import '../core/storage/local/app_settings_shared_preferences.dart';
+import '../core/storage/local/database/provider/database_provider.dart';
 import '../features/auth/presentation/controller/auth_cubit.dart';
+import '../features/home/presentation/controller/home_cubit.dart';
+import '../features/search/presentation/controller/search_cubit.dart';
 import '../features/main/presentation/controller/main_cubit.dart';
 import '../firebase_options.dart';
 
@@ -18,6 +22,8 @@ initModule() async {
   WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp(options: DefaultFirebaseOptions.currentPlatform);
   Bloc.observer = MyBlocObserver();
+  await DatabaseProvider().initDatabase();
+
   final SharedPreferences sharedPreferences =
       await SharedPreferences.getInstance();
 
@@ -27,9 +33,14 @@ initModule() async {
     () => AppSettingsSharedPreferences(instance()),
   );
 
-  // Services
-  instance.registerLazySingleton<FirebaseAuthService>(() => FirebaseAuthService());
+  // Firebase Services
+  instance.registerLazySingleton<FirebaseAuthService>(
+    () => FirebaseAuthService(),
+  );
   instance.registerLazySingleton<FirestoreService>(() => FirestoreService());
+
+  instance.registerLazySingleton<http.Client>(() => http.Client());
+
 }
 
 initAuth() {
@@ -38,7 +49,7 @@ initAuth() {
   }
 }
 
-disposeAuth(){
+disposeAuth() {
   if (GetIt.I.isRegistered<AuthCubit>()) {
     instance.unregister<AuthCubit>();
   }
@@ -48,11 +59,24 @@ initMain() {
   disposeAuth();
   if (!GetIt.I.isRegistered<MainCubit>()) {
     instance.registerLazySingleton<MainCubit>(() => MainCubit());
+    instance.registerLazySingleton<HomeCubit>(() => HomeCubit(instance()));
   }
 }
 
-disposeMain(){
+disposeMain() {
   if (GetIt.I.isRegistered<MainCubit>()) {
     instance.unregister<MainCubit>();
+  }
+}
+
+initSearch() {
+  if (!GetIt.I.isRegistered<SearchCubit>()) {
+    instance.registerLazySingleton<SearchCubit>(() => SearchCubit(instance()));
+  }
+}
+
+disposeSearch() {
+  if (GetIt.I.isRegistered<SearchCubit>()) {
+    instance.unregister<SearchCubit>();
   }
 }

@@ -4,6 +4,7 @@ import '../../../../core/device/device_utility.dart';
 
 class OnboardingScreen extends StatelessWidget {
   const OnboardingScreen({
+    super.key,
     required this.image,
     required this.title,
     required this.subtitle,
@@ -18,10 +19,7 @@ class OnboardingScreen extends StatelessWidget {
         // Background Image
         Container(
           decoration: BoxDecoration(
-            image: DecorationImage(
-              image: AssetImage(image),
-              fit: BoxFit.cover,
-            ),
+            image: DecorationImage(image: AssetImage(image), fit: BoxFit.cover),
           ),
         ),
         Container(
@@ -42,10 +40,7 @@ class OnboardingScreen extends StatelessWidget {
             padding: const EdgeInsets.symmetric(horizontal: 16),
             child: Text(
               title,
-              style: const TextStyle(
-                color: Colors.white,
-                fontSize: 40,
-              ),
+              style: const TextStyle(color: Colors.white, fontSize: 40),
             ),
           ),
         ),

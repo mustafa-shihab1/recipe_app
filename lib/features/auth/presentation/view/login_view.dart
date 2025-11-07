@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
-import '../../../../config/dependency_injection.dart';
 import '../../../../core/resources/assets_manager.dart';
 import '../../../../core/resources/colors_manager.dart';
 import '../../../../core/utils/utils.dart';
@@ -23,9 +22,7 @@ class LoginView extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       extendBodyBehindAppBar: true,
-      appBar: AuthAppBar(
-        switchText: 'Register',
-      ),
+      appBar: AuthAppBar(switchText: 'Register'),
       body: BlocConsumer<AuthCubit, AuthState>(
         listener: (context, state) {
           if (state is AuthLoadingState) {
@@ -68,9 +65,7 @@ class LoginView extends StatelessWidget {
                           children: [
                             Text(
                               'Login',
-                              style: Theme.of(context)
-                                  .textTheme
-                                  .headlineLarge
+                              style: Theme.of(context).textTheme.headlineLarge
                                   ?.copyWith(fontWeight: FontWeight.bold),
                             ),
                             const SizedBox(height: 20),
@@ -99,7 +94,8 @@ class LoginView extends StatelessWidget {
                               child: Text(
                                 'Forgot Password?',
                                 style: TextStyle(
-                                    color: ColorsManager.primaryColor),
+                                  color: ColorsManager.primaryColor,
+                                ),
                               ),
                             ),
                             const SizedBox(height: 30),
@@ -109,16 +105,16 @@ class LoginView extends StatelessWidget {
                                 onPressed: () {
                                   if (_formKey.currentState!.validate()) {
                                     context.read<AuthCubit>().login(
-                                          _emailController.text.trim(),
-                                          _passwordController.text.trim(),
-                                        );
+                                      _emailController.text.trim(),
+                                      _passwordController.text.trim(),
+                                    );
                                   }
                                 },
                                 style: ElevatedButton.styleFrom(
                                   padding: const EdgeInsets.symmetric(
-                                      vertical: 20),
-                                  backgroundColor:
-                                      ColorsManager.primaryColor,
+                                    vertical: 20,
+                                  ),
+                                  backgroundColor: ColorsManager.primaryColor,
                                 ),
                                 child: const Text(
                                   'Login',
