@@ -9,7 +9,9 @@ import '../bloc_observer.dart';
 import '../core/firebase/firebase_auth_service.dart';
 import '../core/firebase/firestore_service.dart';
 import '../core/storage/local/app_settings_shared_preferences.dart';
+import '../core/storage/local/database/controller/recipe_database_controller.dart';
 import '../core/storage/local/database/provider/database_provider.dart';
+import '../features/addRecipe/presentation/controller/add_recipe_cubit.dart';
 import '../features/auth/presentation/controller/auth_cubit.dart';
 import '../features/home/presentation/controller/home_cubit.dart';
 import '../features/search/presentation/controller/search_cubit.dart';
@@ -39,8 +41,9 @@ initModule() async {
   );
   instance.registerLazySingleton<FirestoreService>(() => FirestoreService());
 
-  instance.registerLazySingleton<http.Client>(() => http.Client());
+  instance.registerLazySingleton<RecipeDatabaseController>(() => RecipeDatabaseController());
 
+  instance.registerLazySingleton<http.Client>(() => http.Client());
 }
 
 initAuth() {
@@ -78,5 +81,11 @@ initSearch() {
 disposeSearch() {
   if (GetIt.I.isRegistered<SearchCubit>()) {
     instance.unregister<SearchCubit>();
+  }
+}
+
+initAddRecipe() {
+  if (!GetIt.I.isRegistered<AddRecipeCubit>()) {
+    instance.registerFactory<AddRecipeCubit>(() => AddRecipeCubit(instance()));
   }
 }

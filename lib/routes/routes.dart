@@ -1,6 +1,7 @@
 
 import 'package:flutter/material.dart';
 import '../core/widgets/app_start_view.dart';
+import '../features/addRecipe/presentation/view/add_recipe_view.dart';
 import '../features/auth/presentation/view/register_view.dart';
 import '../config/dependency_injection.dart';
 import '../core/resources/strings_manager.dart';
@@ -18,6 +19,7 @@ class Routes {
   static const String exploreView = '/explore_view';
   static const String favoritesView = '/favorites_view';
   static const String profileView = '/profile_view';
+  static const String addRecipeView = '/add_recipe_view';
 }
 
 class RouteGenerator {
@@ -38,6 +40,9 @@ class RouteGenerator {
       case Routes.searchView:
         initSearch();
         return MaterialPageRoute(builder: (_) => const SearchView());
+    case Routes.addRecipeView:
+        initAddRecipe();
+        return MaterialPageRoute(builder: (_) => const AddRecipeView());
       default:
         return unDefinedRoute();
     }
