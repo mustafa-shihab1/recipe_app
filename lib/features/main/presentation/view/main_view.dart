@@ -3,7 +3,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 
 import '../../../../core/resources/colors_manager.dart';
 import '../../../../core/widgets/bottom_nav_bar.dart';
-import '../../../addRecipe/presentation/view/add_recipe_view.dart';
+import '../../../../routes/routes.dart';
 import '../controller/main_cubit.dart';
 import '../controller/main_state.dart';
 
@@ -31,17 +31,17 @@ class MainView extends StatelessWidget {
               elevation: 4,
               shape: const CircleBorder(),
               onPressed: () {
-                Navigator.push(context, MaterialPageRoute(builder: (context) => AddRecipeView(),));
+                Navigator.pushNamed(context, Routes.addRecipeView);
               },
               child: const Icon(Icons.add, color: Colors.white),
             ),
-            floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
-
+            floatingActionButtonLocation:
+                FloatingActionButtonLocation.centerDocked,
 
             bottomNavigationBar: BottomNavBar(
-
               currentIndex: currentIndex,
-              onTap: (index) => context.read<MainCubit>().changeBottomNav(index),
+              onTap: (index) =>
+                  context.read<MainCubit>().changeBottomNav(index),
               icons: context.read<MainCubit>().icons,
               labels: context.read<MainCubit>().labels,
             ),
