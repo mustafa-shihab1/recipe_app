@@ -11,6 +11,7 @@ import '../core/firebase/firestore_service.dart';
 import '../core/storage/local/app_settings_shared_preferences.dart';
 import '../core/storage/local/database/controller/recipe_database_controller.dart';
 import '../core/storage/local/database/provider/database_provider.dart';
+import '../features/MyRecipes/presentation/controller/my_recipes_cubit.dart';
 import '../features/addRecipe/presentation/controller/add_recipe_cubit.dart';
 import '../features/auth/presentation/controller/auth_cubit.dart';
 import '../features/home/presentation/controller/home_cubit.dart';
@@ -41,7 +42,9 @@ initModule() async {
   );
   instance.registerLazySingleton<FirestoreService>(() => FirestoreService());
 
-  instance.registerLazySingleton<RecipeDatabaseController>(() => RecipeDatabaseController());
+  instance.registerLazySingleton<RecipeDatabaseController>(
+    () => RecipeDatabaseController(),
+  );
 
   instance.registerLazySingleton<http.Client>(() => http.Client());
 }
@@ -63,6 +66,9 @@ initMain() {
   if (!GetIt.I.isRegistered<MainCubit>()) {
     instance.registerLazySingleton<MainCubit>(() => MainCubit());
     instance.registerLazySingleton<HomeCubit>(() => HomeCubit(instance()));
+    instance.registerLazySingleton<MyRecipesCubit>(
+      () => MyRecipesCubit(instance()),
+    );
   }
 }
 
