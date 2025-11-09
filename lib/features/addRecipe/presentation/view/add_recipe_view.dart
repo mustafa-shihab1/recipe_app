@@ -30,50 +30,8 @@ class _AddRecipeViewState extends State<AddRecipeView> {
     super.dispose();
   }
 
-  // Future<void> _pickImage() async {
-  //   final pickedImage = await ImagePicker().pickImage(
-  //     source: ImageSource.gallery,
-  //     imageQuality: 70,
-  //   );
-
-  //   if (pickedImage != null) {
-  //     setState(() {
-  //       _imagePath = pickedImage.path;
-  //     });
-  //   } else {
-  //     ScaffoldMessenger.of(
-  //       context,
-  //     ).showSnackBar(const SnackBar(content: Text('No image selected.')));
-  //   }
-  // }
-
-  // This method now only triggers the cubit.
-  // void _saveRecipe() {
-  //   if (_formKey.currentState!.validate()) {
-  //     if (_imagePath == null) {
-  //       ScaffoldMessenger.of(context).showSnackBar(
-  //         const SnackBar(
-  //           content: Text('Please select an image for the recipe.'),
-  //         ),
-  //       );
-  //       return;
-  //     }
-  //     // Create the Recipe object from the form data.
-  //     final newRecipe = Recipe(
-  //       name: _nameController.text,
-  //       category: _categoryController.text,
-  //       area: _areaController.text,
-  //       instructions: _instructionsController.text,
-  //       imagePath: recipePickedImage!.path,
-  //     );
-  //     // Call the cubit to handle the business logic.
-  //     context.read<AddRecipeCubit>().addRecipe(newRecipe);
-  //   }
-  // }
-
   @override
   Widget build(BuildContext context) {
-    // Provide the cubit to the widget tree.
     return BlocProvider(
       create: (_) => instance<AddRecipeCubit>(),
       child: Scaffold(
