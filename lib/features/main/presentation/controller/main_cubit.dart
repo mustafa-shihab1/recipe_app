@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:recipe_app/features/home/presentation/view/home_view.dart';
 import '../../../../core/resources/assets_manager.dart';
+import '../../../MyRecipes/presentation/view/my_recipes_view.dart';
+import '../../../home/presentation/view/home_view.dart';
 import 'main_state.dart';
 
 class MainCubit extends Cubit<MainState> {
@@ -9,22 +10,22 @@ class MainCubit extends Cubit<MainState> {
 
   final List<Widget> screens = <Widget>[
     const HomeView(),
-    const Center(child: Text('Explore Page'),),
-    const Center(child: Text('Favorites Page')),
+    const Center(child: Text('Favorites Page'),),
+    const MyRecipesView(),
     const Center(child: Text('Profile Page')),
   ];
 
   final List<String> icons = <String>[
     AssetsManager.homeIcon,
-    AssetsManager.exploreIcon,
     AssetsManager.favoritesIcon,
+    AssetsManager.savedIcon,
     AssetsManager.profileIcon,
   ];
 
   final List<String> labels = <String>[
     'Home',
-    'Explore',
     'Favorites',
+    'My Recipes',
     'Profile',
   ];
 
