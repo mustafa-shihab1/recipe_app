@@ -15,6 +15,7 @@ import '../features/MyRecipes/presentation/controller/my_recipes_cubit.dart';
 import '../features/addRecipe/presentation/controller/add_recipe_cubit.dart';
 import '../features/auth/presentation/controller/auth_cubit.dart';
 import '../features/home/presentation/controller/home_cubit.dart';
+import '../features/recipeDetails/presentation/controller/recipe_details_cubit.dart';
 import '../features/search/presentation/controller/search_cubit.dart';
 import '../features/main/presentation/controller/main_cubit.dart';
 import '../firebase_options.dart';
@@ -93,5 +94,13 @@ disposeSearch() {
 initAddRecipe() {
   if (!GetIt.I.isRegistered<AddRecipeCubit>()) {
     instance.registerFactory<AddRecipeCubit>(() => AddRecipeCubit(instance()));
+  }
+}
+
+initRecipeDetails() {
+  if (!GetIt.I.isRegistered<RecipeDetailsCubit>()) {
+    instance.registerFactory<RecipeDetailsCubit>(
+      () => RecipeDetailsCubit(instance()),
+    );
   }
 }
