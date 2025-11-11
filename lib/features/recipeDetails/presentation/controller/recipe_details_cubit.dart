@@ -14,15 +14,15 @@ class RecipeDetailsCubit extends Cubit<RecipeDetailsState> {
 
   final bool isFavorite = false;
 
-  // Future<void> addToFavorites(Recipe recipe) async {
-  //   try {
-  //     await _recipeDatabaseController.addRecipeToFavorites(recipe);
-  //     print('Recipe added to favorites successfully!');
-  //     emit(RecipeAddedToFavoritesState());
-  //   } catch (e) {
-  //     emit(RecipeDetailsErrorState(e.toString()));
-  //   }
-  // }
+  Future<void> addToFavorites(Recipe recipe) async {
+    try {
+      await _recipeDatabaseController.addRecipeToFavorites(recipe);
+      print('Recipe added to favorites successfully!');
+      emit(RecipeAddedToFavoritesState());
+    } catch (e) {
+      emit(RecipeDetailsErrorState(e.toString()));
+    }
+  }
 
   Future<void> updateRecipe(Recipe recipe) async {
     try {
