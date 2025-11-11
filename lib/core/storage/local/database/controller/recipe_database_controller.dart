@@ -33,6 +33,13 @@ class RecipeDatabaseController {
     return result;
   }
 
+  Future<int> addRecipeToFavorites(Recipe recipe) async {
+    int result = await database!.rawUpdate(
+      'UPDATE ${SqfLiteConstants.tableName} SET ${SqfLiteConstants.columnIsFavorite} = 1 WHERE ${SqfLiteConstants.columnId} = ${recipe.id}',
+    );
+    return result;
+  }
+
   Future<int> deleteRecipeFromDb(int id) async {
     int countItemsDeleted = await database!.rawDelete(
       'DELETE FROM ${SqfLiteConstants.tableName} WHERE ${SqfLiteConstants.columnId} = ?',

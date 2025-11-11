@@ -5,6 +5,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 
 import '../../../../config/dependency_injection.dart';
 import '../../../../core/resources/colors_manager.dart';
+import '../../../../routes/routes.dart';
 import '../controller/my_recipes_cubit.dart';
 import '../controller/my_recipes_state.dart';
 
@@ -34,60 +35,72 @@ class MyRecipesView extends StatelessWidget {
               itemCount: cubit.recipes.length,
               itemBuilder: (context, index) => Padding(
                 padding: const EdgeInsets.symmetric(horizontal: 16),
-                child: Card(
-                  shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(20),
-                  ),
-                  elevation: 8,
-                  margin: const EdgeInsets.symmetric(
-                    vertical: 14,
-                    horizontal: 8,
-                  ),
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      ClipRRect(
-                        borderRadius: const BorderRadius.vertical(
-                          top: Radius.circular(20),
-                        ),
-                        child: Image.file(
-                          File(cubit.recipes[index].imagePath),
-                          height: 200,
-                          width: double.infinity,
-                          fit: BoxFit.cover,
-                        ),
-                      ),
-                      Padding(
-                        padding: const EdgeInsets.fromLTRB(16, 16, 16, 8),
-                        child: Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            Text(
-                              cubit.recipes[index].name,
-                              style: const TextStyle(
-                                fontWeight: FontWeight.bold,
-                                fontSize: 20,
-                              ),
+                child: InkWell(
+                  onTap: () {
+                    Navigator.pushNamed(
+                      context,
+                      Routes.recipeDetailsView,
+                      arguments: cubit.recipes[index],
+                    );
+                  },
+                  child: Card(
+                    shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(20),
+                    ),
+                    elevation: 8,
+                    margin: const EdgeInsets.symmetric(
+                      vertical: 14,
+                      horizontal: 8,
+                    ),
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        ClipRRect(
+                          borderRadius: const BorderRadius.vertical(
+                            top: Radius.circular(20),
+                          ),
+                          child: Hero(
+                            tag: 'recipeImage-${cubit.recipes[index].id}',
+                            child: Image.file(
+                              File(cubit.recipes[index].imagePath),
+                              height: 200,
+                              width: double.infinity,
+                              fit: BoxFit.cover,
                             ),
-                            const SizedBox(height: 4),
-                            Row(
-                              children: [
-                                Spacer(),
-                                Text(
-                                  '${cubit.recipes[index].category} | ${cubit.recipes[index].area}',
-                                  style: const TextStyle(
-                                    color: Colors.black45,
-                                    fontSize: 16,
-                                  ),
+                          ),
+                        ),
+                        Padding(
+                          padding: const EdgeInsets.fromLTRB(16, 16, 16, 8),
+                          child: Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              Text(
+                                cubit.recipes[index].name,
+                                style: const TextStyle(
+                                  fontWeight: FontWeight.bold,
+                                  fontSize: 20,
                                 ),
-                                const SizedBox(width: 8),
-                              ],
-                            ),
-                            const SizedBox(height: 8),
-                          ],
+                              ),
+                              const SizedBox(height: 4),
+                              Row(
+                                children: [
+                                  Spacer(),
+                                  Text(
+                                    '${cubit.recipes[index].category} | ${cubit.recipes[index].area}',
+                                    style: const TextStyle(
+                                      color: Colors.black45,
+                                      fontSize: 16,
+                                    ),
+                                  ),
+                                  const SizedBox(width: 8),
+                                ],
+                              ),
+                              const SizedBox(height: 8),
+                            ],
+                          ),
                         ),
-                      ),
-                    ],
+                      ],
+                    ),
                   ),
                 ),
               ),
