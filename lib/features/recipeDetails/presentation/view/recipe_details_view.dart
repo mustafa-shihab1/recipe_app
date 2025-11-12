@@ -7,19 +7,28 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import '../../../../config/dependency_injection.dart';
 import '../../../../core/resources/colors_manager.dart';
 import '../../../../core/storage/local/database/model/recipe.dart';
+import '../../../../routes/routes.dart';
 import '../controller/recipe_details_cubit.dart';
+import '../controller/recipe_details_state.dart';
+import 'edit_recipe_view.dart';
 
 class RecipeDetailsView extends StatelessWidget {
-  final Recipe recipe;
+  Recipe recipe;
 
-  const RecipeDetailsView({super.key, required this.recipe});
+  RecipeDetailsView({super.key, required this.recipe});
 
   @override
   Widget build(BuildContext context) {
     return BlocProvider(
       create: (context) => instance<RecipeDetailsCubit>(),
-      child: Builder(
-        builder: (context) {
+      child: BlocConsumer<RecipeDetailsCubit, RecipeDetailsState>(
+        listener: (context, state) {
+          if (state is RecipeUpdatedState) {
+            recipe = state.updatedRecipe;
+          }
+        },
+        builder: (context, state) {
+
           return Scaffold(
             extendBodyBehindAppBar: true,
             body: Stack(
@@ -255,7 +264,20 @@ class RecipeDetailsView extends StatelessWidget {
                       SizedBox(width: 12),
                       Expanded(
                         child: ElevatedButton(
-                          onPressed: () {},
+                          onPressed: () async {
+                            final result = await Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                builder: (_) => BlocProvider.value(
+                                  value: context.read<RecipeDetailsCubit>(),  // to use the same cubit instance
+                                  child: EditRecipeView(recipe: recipe),
+                                ),
+                              ),
+                            );
+                            if (result == true) {
+                              Navigator.pop(context, true);   // to indicate that the recipe was updated
+                            }
+                          },
                           style: ElevatedButton.styleFrom(
                             backgroundColor: ColorsManager.primaryColor,
                             padding: EdgeInsets.symmetric(vertical: 14),

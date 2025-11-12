@@ -36,12 +36,14 @@ class MyRecipesView extends StatelessWidget {
               itemBuilder: (context, index) => Padding(
                 padding: const EdgeInsets.symmetric(horizontal: 16),
                 child: InkWell(
-                  onTap: () {
-                    Navigator.pushNamed(
+                  onTap: () async{
+                    final result  = await Navigator.pushNamed(
                       context,
                       Routes.recipeDetailsView,
                       arguments: cubit.recipes[index],
                     );
+                    if (result == true) {
+                      context.read<MyRecipesCubit>().getSavedRecipe();  }// Refresh the list if recipe was updated                    }
                   },
                   child: Card(
                     shape: RoundedRectangleBorder(
