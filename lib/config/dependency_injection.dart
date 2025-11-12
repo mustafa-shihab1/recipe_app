@@ -14,6 +14,7 @@ import '../core/storage/local/database/provider/database_provider.dart';
 import '../features/MyRecipes/presentation/controller/my_recipes_cubit.dart';
 import '../features/addRecipe/presentation/controller/add_recipe_cubit.dart';
 import '../features/auth/presentation/controller/auth_cubit.dart';
+import '../features/favorites/presentation/controller/favorites_cubit.dart';
 import '../features/home/presentation/controller/home_cubit.dart';
 import '../features/recipeDetails/presentation/controller/recipe_details_cubit.dart';
 import '../features/search/presentation/controller/search_cubit.dart';
@@ -69,6 +70,9 @@ initMain() {
     instance.registerLazySingleton<HomeCubit>(() => HomeCubit(instance()));
     instance.registerLazySingleton<MyRecipesCubit>(
       () => MyRecipesCubit(instance()),
+    );
+    instance.registerLazySingleton<FavoritesCubit>(
+      () => FavoritesCubit(instance()),
     );
   }
 }

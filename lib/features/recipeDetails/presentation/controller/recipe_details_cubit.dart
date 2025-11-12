@@ -5,6 +5,7 @@ import '../../../../config/dependency_injection.dart';
 import '../../../../core/storage/local/database/controller/recipe_database_controller.dart';
 import '../../../../core/storage/local/database/model/recipe.dart';
 import '../../../MyRecipes/presentation/controller/my_recipes_cubit.dart';
+import '../../../favorites/presentation/controller/favorites_cubit.dart';
 import 'recipe_details_state.dart';
 
 class RecipeDetailsCubit extends Cubit<RecipeDetailsState> {
@@ -27,6 +28,7 @@ class RecipeDetailsCubit extends Cubit<RecipeDetailsState> {
   Future<void> addToFavorites(Recipe recipe) async {
     try {
       await _recipeDatabaseController.addRecipeToFavorites(recipe);
+      instance<FavoritesCubit>().getFavoriteRecipes();
       print('Recipe added to favorites successfully!');
       emit(RecipeAddedToFavoritesState());
     } catch (e) {

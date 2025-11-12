@@ -57,7 +57,6 @@ class RouteGenerator {
         return MaterialPageRoute(
           builder: (_) => EditRecipeView(recipe: recipe),
         );
-
       default:
         return unDefinedRoute();
     }

@@ -7,7 +7,6 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import '../../../../config/dependency_injection.dart';
 import '../../../../core/resources/colors_manager.dart';
 import '../../../../core/storage/local/database/model/recipe.dart';
-import '../../../../routes/routes.dart';
 import '../controller/recipe_details_cubit.dart';
 import '../controller/recipe_details_state.dart';
 import 'edit_recipe_view.dart';

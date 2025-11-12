@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import '../../../../core/resources/assets_manager.dart';
 import '../../../MyRecipes/presentation/view/my_recipes_view.dart';
+import '../../../favorites/presentation/view/favorites_view.dart';
 import '../../../home/presentation/view/home_view.dart';
 import 'main_state.dart';
 
@@ -10,7 +11,7 @@ class MainCubit extends Cubit<MainState> {
 
   final List<Widget> screens = <Widget>[
     const HomeView(),
-    const Center(child: Text('Favorites Page'),),
+    const FavoritesView(),
     const MyRecipesView(),
     const Center(child: Text('Profile Page')),
   ];

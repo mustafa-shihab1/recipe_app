@@ -39,6 +39,26 @@ class RecipeDatabaseController {
     return result;
   }
 
+  Future<List<Recipe>> getFavoriteRecipesFromDb() async {
+    var result = await database!.rawQuery(
+      'SELECT * FROM ${SqfLiteConstants.tableName} WHERE ${SqfLiteConstants.columnIsFavorite} = 1',
+    );
+    List<Recipe> favorites = [];
+    for (var map in result) {
+      Recipe recipe = Recipe.fromMap(map);
+      favorites.add(recipe);
+    }
+    return favorites;
+  }
+
+  Future<int> removeFromFavorites(int id) async {
+    int result = await database!.rawUpdate(
+      'UPDATE ${SqfLiteConstants.tableName} SET ${SqfLiteConstants.columnIsFavorite} = 0 WHERE ${SqfLiteConstants.columnId} = ?',
+      [id],
+    );
+    return result;
+  }
+
   Future<int> deleteRecipeFromDb(int id) async {
     int countItemsDeleted = await database!.rawDelete(
       'DELETE FROM ${SqfLiteConstants.tableName} WHERE ${SqfLiteConstants.columnId} = ?',
