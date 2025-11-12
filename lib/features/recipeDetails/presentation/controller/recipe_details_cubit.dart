@@ -1,4 +1,5 @@
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:image_picker/image_picker.dart';
 
 import '../../../../config/dependency_injection.dart';
 import '../../../../core/storage/local/database/controller/recipe_database_controller.dart';
@@ -13,6 +14,15 @@ class RecipeDetailsCubit extends Cubit<RecipeDetailsState> {
   final RecipeDatabaseController _recipeDatabaseController;
 
   final bool isFavorite = false;
+  XFile? recipePickedImage;
+
+  Future<void> pickRecipeImage() async {
+    recipePickedImage = await ImagePicker().pickImage(
+      source: ImageSource.gallery,
+    );
+    if (recipePickedImage == null) return;
+    emit(RecipeImagePickedState(recipePickedImage!));
+  }
 
   Future<void> addToFavorites(Recipe recipe) async {
     try {
@@ -28,7 +38,7 @@ class RecipeDetailsCubit extends Cubit<RecipeDetailsState> {
     try {
       await _recipeDatabaseController.updateRecipeFromDb(recipe);
       print('Recipe updated successfully!');
-      emit(RecipeUpdatedState());
+      emit(RecipeUpdatedState(recipe));
     } catch (e) {
       emit(RecipeDetailsErrorState(e.toString()));
     }
@@ -38,6 +48,7 @@ class RecipeDetailsCubit extends Cubit<RecipeDetailsState> {
     try {
       await _recipeDatabaseController.deleteRecipeFromDb(recipeId);
       print('Recipe deleted successfully!');
+      instance<MyRecipesCubit>().getSavedRecipe();
       emit(RecipeDeletedState());
     } catch (e) {
       emit(RecipeDetailsErrorState(e.toString()));

@@ -7,6 +7,7 @@ import '../config/dependency_injection.dart';
 import '../core/resources/strings_manager.dart';
 import '../features/auth/presentation/view/login_view.dart';
 import '../features/main/presentation/view/main_view.dart';
+import '../features/recipeDetails/presentation/view/edit_recipe_view.dart';
 import '../features/recipeDetails/presentation/view/recipe_details_view.dart';
 import '../features/search/presentation/view/search_view.dart';
 
@@ -22,6 +23,7 @@ class Routes {
   static const String profileView = '/profile_view';
   static const String addRecipeView = '/add_recipe_view';
   static const String recipeDetailsView = '/recipe_details_view';
+  static const String editRecipeView = '/edit_recipe_view';
 }
 
 class RouteGenerator {
@@ -47,7 +49,14 @@ class RouteGenerator {
       case Routes.recipeDetailsView:
         initRecipeDetails();
         final recipe = settings.arguments as Recipe;
-        return MaterialPageRoute(builder: (_) => RecipeDetailsView(recipe: recipe));
+        return MaterialPageRoute(
+          builder: (_) => RecipeDetailsView(recipe: recipe),
+        );
+      case Routes.editRecipeView:
+        final recipe = settings.arguments as Recipe;
+        return MaterialPageRoute(
+          builder: (_) => EditRecipeView(recipe: recipe),
+        );
 
       default:
         return unDefinedRoute();

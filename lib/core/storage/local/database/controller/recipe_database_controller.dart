@@ -17,7 +17,6 @@ class RecipeDatabaseController {
     var result = await database!.rawQuery(
       'SELECT * FROM ${SqfLiteConstants.tableName}',
     );
-    print(result);
     List<Recipe> recipes = [];
     for (var map in result) {
       Recipe recipe = Recipe.fromMap(map);
