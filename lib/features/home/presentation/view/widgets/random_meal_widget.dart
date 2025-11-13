@@ -60,6 +60,18 @@ class RandomMealWidget extends StatelessWidget {
                       height: 200,
                       width: double.infinity,
                       fit: BoxFit.cover,
+                      loadingBuilder: (context, child, loadingProgress) {
+                        if (loadingProgress == null) return child;
+                        return Container(
+                          color: Colors.grey[200],
+                          child: SizedBox(
+                            height: 200,
+                            child: const Center(
+                              child: CircularProgressIndicator(strokeWidth: 1.5),
+                            ),
+                          ),
+                        );
+                      },
                     ),
                   ),
                   Padding(

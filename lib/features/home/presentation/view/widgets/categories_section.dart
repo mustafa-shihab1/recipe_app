@@ -54,7 +54,7 @@ class CategoriesSection extends StatelessWidget {
               child: GridView.builder(
                 shrinkWrap: true,
                 physics: NeverScrollableScrollPhysics(),
-                itemCount: 6,
+                itemCount: 8,
                 gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
                   crossAxisCount: 2,
                   crossAxisSpacing: 16,
@@ -78,7 +78,17 @@ class CategoriesSection extends StatelessWidget {
                             child: Image.network(
                               category.strCategoryThumb,
                               fit: BoxFit.cover,
+                              loadingBuilder: (context, child, loadingProgress) {
+                                if (loadingProgress == null) return child;
+                                return Container(
+                                  color: Colors.grey[200],
+                                  child: const Center(
+                                    child: CircularProgressIndicator(strokeWidth: 1.5),
+                                  ),
+                                );
+                              },
                             ),
+
                           ),
                           Positioned.fill(
                             child: Container(
