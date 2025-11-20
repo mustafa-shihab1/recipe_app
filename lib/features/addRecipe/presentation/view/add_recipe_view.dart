@@ -36,7 +36,6 @@ class _AddRecipeViewState extends State<AddRecipeView> {
       create: (_) => instance<AddRecipeCubit>(),
       child: Scaffold(
         appBar: AppBar(title: const Text('Add a New Recipe')),
-        // Use a BlocListener to react to state changes for side-effects like navigation or SnackBars.
         body: BlocConsumer<AddRecipeCubit, AddRecipeState>(
           listener: (context, state) {
             if (state is AddRecipeSuccessState) {
@@ -169,7 +168,6 @@ class _AddRecipeViewState extends State<AddRecipeView> {
                     ),
                     const SizedBox(height: 32),
 
-                    // A BlocBuilder can be used to show a loading indicator on the button.
                     ElevatedButton.icon(
                       icon: const Icon(Icons.save_alt_outlined),
                       label: const Text('Save Recipe'),

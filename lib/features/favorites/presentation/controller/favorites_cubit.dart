@@ -16,7 +16,6 @@ class FavoritesCubit extends Cubit<FavoritesState> {
     try {
       favorites = await _recipeDatabaseController.getFavoriteRecipesFromDb();
       print('Favorites retrieved successfully! (${favorites.length} items)');
-
       emit(LoadedFavoritesState(favorites));
     } catch (e) {
       emit(ErrorFavoritesState(e.toString()));

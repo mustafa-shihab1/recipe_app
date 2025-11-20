@@ -36,7 +36,7 @@ class SearchCubit extends Cubit<SearchState> {
               .toList();
           emit(SearchSuccessState(meals));
         } else {
-          emit(SearchSuccessState([])); // no results found
+          emit(SearchSuccessState([]));
         }
       } else {
         emit(

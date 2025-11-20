@@ -66,19 +66,4 @@ class RecipeDatabaseController {
     );
     return countItemsDeleted;
   }
-
-  // Future<bool> markAsCompleted(Note object) async {
-  //   int countItemsUpdated = await database!.update(
-  //       Constants.notesTableName, {Constants.notesIsCompletedColumnName: 1},
-  //       where: '${Constants.notesIdColumnName} = ?', whereArgs: [object.id]);
-  //   return countItemsUpdated > 0;
-  // }
-
-  // Future<List<Note>> readCompleted() async {
-  //   List<Map<String, Object?>> data = await database!.query(
-  //       Constants.notesTableName,
-  //       where: '${Constants.notesIsCompletedColumnName} = ?',
-  //       whereArgs: [1]);
-  //   return data.map((row) => Note.fromMap(row)).toList();
-  // }
 }

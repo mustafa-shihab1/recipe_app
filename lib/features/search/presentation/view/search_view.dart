@@ -22,7 +22,11 @@ class SearchView extends StatelessWidget {
                 Navigator.pop(context);
                 disposeSearch();
               },
-              child: Icon(Icons.arrow_back_ios_new, color: ColorsManager.primaryColor,size: 14,),
+              child: Icon(
+                Icons.arrow_back_ios_new,
+                color: ColorsManager.primaryColor,
+                size: 14,
+              ),
             ),
           ),
           title: Builder(
@@ -63,7 +67,10 @@ class SearchView extends StatelessWidget {
                 );
               }
               return ListView.separated(
-                padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 12),
+                padding: const EdgeInsets.symmetric(
+                  horizontal: 16,
+                  vertical: 12,
+                ),
                 itemCount: state.meals.length,
                 separatorBuilder: (_, __) => const SizedBox(height: 12),
                 itemBuilder: (context, index) {
@@ -71,8 +78,7 @@ class SearchView extends StatelessWidget {
 
                   return InkWell(
                     borderRadius: BorderRadius.circular(16),
-                    onTap: () {
-                    },
+                    onTap: () {},
                     child: Container(
                       height: 110,
                       decoration: BoxDecoration(
@@ -89,7 +95,6 @@ class SearchView extends StatelessWidget {
                       ),
                       child: Row(
                         children: [
-                          // Meal image
                           ClipRRect(
                             borderRadius: const BorderRadius.only(
                               topLeft: Radius.circular(16),
@@ -102,13 +107,31 @@ class SearchView extends StatelessWidget {
                                 width: 120,
                                 height: double.infinity,
                                 fit: BoxFit.cover,
+                                loadingBuilder:
+                                    (context, child, loadingProgress) {
+                                      if (loadingProgress == null) return child;
+                                      return Container(
+                                        color: Colors.grey[200],
+                                        child: SizedBox(
+                                          width: 120,
+                                          child: const Center(
+                                            child: CircularProgressIndicator(
+                                              strokeWidth: 1.5,
+                                            ),
+                                          ),
+                                        ),
+                                      );
+                                    },
                               ),
                             ),
                           ),
 
                           Expanded(
                             child: Padding(
-                              padding: const EdgeInsets.symmetric(horizontal: 14, vertical: 12),
+                              padding: const EdgeInsets.symmetric(
+                                horizontal: 14,
+                                vertical: 12,
+                              ),
                               child: Column(
                                 crossAxisAlignment: CrossAxisAlignment.start,
                                 children: [
@@ -134,14 +157,21 @@ class SearchView extends StatelessWidget {
 
                                   Row(
                                     children: [
-                                      Icon(Icons.restaurant_menu,
-                                          size: 16, color: Colors.grey.shade700),
+                                      Icon(
+                                        Icons.restaurant_menu,
+                                        size: 16,
+                                        color: Colors.grey.shade700,
+                                      ),
                                       const SizedBox(width: 4),
-                                      Text(
-                                        "${meal.strArea} Cuisine",
-                                        style: TextStyle(
-                                          fontSize: 13,
-                                          color: Colors.grey.shade700,
+                                      Flexible(
+                                        child: Text(
+                                          "${meal.strArea} Cuisine",
+                                          style: TextStyle(
+                                            fontSize: 13,
+                                            color: Colors.grey.shade700,
+                                          ),
+                                          maxLines: 2,
+                                          overflow: TextOverflow.ellipsis,
                                         ),
                                       ),
                                     ],
@@ -156,7 +186,6 @@ class SearchView extends StatelessWidget {
                   );
                 },
               );
-
             }
             return const Center(
               child: Text('Start typing to find delicious recipes!'),

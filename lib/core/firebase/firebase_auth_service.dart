@@ -3,13 +3,10 @@ import 'package:firebase_auth/firebase_auth.dart';
 class FirebaseAuthService {
   final FirebaseAuth _auth = FirebaseAuth.instance;
 
-  // get current user
   User? get currentUser => _auth.currentUser;
 
-  // Stream to listen for auth state changes
   Stream<User?> get authStateChanges => _auth.authStateChanges();
 
-  // Login
   Future<UserCredential> login({
     required String email,
     required String password,
@@ -24,7 +21,6 @@ class FirebaseAuthService {
     }
   }
 
-  // Register
   Future<UserCredential> register({
     required String name,
     required String email,
@@ -42,7 +38,6 @@ class FirebaseAuthService {
     }
   }
 
-  // Sign out
   Future<void> signOut() async {
     try {
       await _auth.signOut();

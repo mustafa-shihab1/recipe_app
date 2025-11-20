@@ -31,12 +31,13 @@ class FavoritesView extends StatelessWidget {
           builder: (context, state) {
             final cubit = context.read<FavoritesCubit>();
             if (state is LoadedFavoritesState && state.favorites.isEmpty) {
-              return const Center(
-                child: Text("No favorite recipes yet. Start adding some!"),
+              return  Center(
+                child: Text("No favorite recipes yet. Start adding some!", style: TextStyle(
+                  fontSize: 18,
+                  color: Colors.grey[600],
+                ),),
               );
-            }else{
-
-            }
+            } else {}
 
             return state is LoadedFavoritesState
                 ? ListView.separated(

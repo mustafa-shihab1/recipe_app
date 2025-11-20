@@ -14,10 +14,10 @@ class HomeView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      backgroundColor: ColorsManager.scaffoldBgColor,
-      body: SafeArea(
-        child: BlocProvider(
+    return SafeArea(
+      child: Scaffold(
+        backgroundColor: ColorsManager.scaffoldBgColor,
+        body: BlocProvider(
           create: (_) => instance<HomeCubit>()
             ..getRandomMeal()
             ..getCategories(),
@@ -59,11 +59,9 @@ class HomeView extends StatelessWidget {
                 ).textTheme.headlineSmall?.copyWith(color: Colors.grey[600]),
               ),
               const SizedBox(height: 14),
-              // create search box
               GestureDetector(
                 onTap: () => Navigator.pushNamed(context, Routes.searchView),
                 child: AbsorbPointer(
-                  // AbsorbPointer prevents the TextField from gaining focus
                   child: TextField(
                     decoration: InputDecoration(
                       hintText: 'Search for recipes...',
