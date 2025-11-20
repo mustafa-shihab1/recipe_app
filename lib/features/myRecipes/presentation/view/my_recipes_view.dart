@@ -31,7 +31,7 @@ class MyRecipesView extends StatelessWidget {
           listener: (context, state) => {},
           builder: (context, state) {
             final cubit = context.read<MyRecipesCubit>();
-            return ListView.builder(
+            return cubit.recipes.length!=0? ListView.builder(
               itemCount: cubit.recipes.length,
               itemBuilder: (context, index) => Padding(
                 padding: const EdgeInsets.symmetric(horizontal: 16),
@@ -104,6 +104,14 @@ class MyRecipesView extends StatelessWidget {
                       ],
                     ),
                   ),
+                ),
+              ),
+            ): Center(
+              child: Text(
+                'No saved recipes yet.',
+                style: TextStyle(
+                  fontSize: 18,
+                  color: Colors.grey[600],
                 ),
               ),
             );
