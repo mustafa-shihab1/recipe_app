@@ -1,4 +1,4 @@
-class AssetsManager{
+class AssetsManager {
   static const String imagesPath = "assets/images";
   static const String iconsPath = "assets/icons";
 
@@ -7,6 +7,7 @@ class AssetsManager{
   static const String onboarding1Bg = "$imagesPath/onboarding1Bg.png";
   static const String onboarding2Bg = "$imagesPath/onboarding2Bg.png";
   static const String onboarding3Bg = "$imagesPath/onboarding3Bg.png";
+  static const String profilePlaceholder = "$imagesPath/person.png";
 
   static const String googleIcon = "$iconsPath/google.png";
   static const String facebookIcon = "$iconsPath/facebook.png";
@@ -18,7 +19,4 @@ class AssetsManager{
   static const String favoritesIcon = "$iconsPath/favorites.png";
   static const String profileIcon = "$iconsPath/profile.png";
   static const String savedIcon = "$iconsPath/saved.png";
-
-
-
 }
