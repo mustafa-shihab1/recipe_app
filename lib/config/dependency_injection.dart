@@ -11,9 +11,10 @@ import '../core/firebase/firestore_service.dart';
 import '../core/storage/local/app_settings_shared_preferences.dart';
 import '../core/storage/local/database/controller/recipe_database_controller.dart';
 import '../core/storage/local/database/provider/database_provider.dart';
-import '../features/MyRecipes/presentation/controller/my_recipes_cubit.dart';
+import '../features/myRecipes/presentation/controller/my_recipes_cubit.dart';
 import '../features/addRecipe/presentation/controller/add_recipe_cubit.dart';
 import '../features/auth/presentation/controller/auth_cubit.dart';
+import '../features/category_recipes/presentation/controller/category_recipes_cubit.dart';
 import '../features/favorites/presentation/controller/favorites_cubit.dart';
 import '../features/home/presentation/controller/home_cubit.dart';
 import '../features/recipeDetails/presentation/controller/recipe_details_cubit.dart';
@@ -105,6 +106,14 @@ initRecipeDetails() {
   if (!GetIt.I.isRegistered<RecipeDetailsCubit>()) {
     instance.registerFactory<RecipeDetailsCubit>(
       () => RecipeDetailsCubit(instance()),
+    );
+  }
+}
+
+initCategoryRecipes() {
+  if (!GetIt.I.isRegistered<CategoryRecipesCubit>()) {
+    instance.registerFactory<CategoryRecipesCubit>(
+      () => CategoryRecipesCubit(instance()),
     );
   }
 }
