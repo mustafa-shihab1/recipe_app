@@ -21,6 +21,8 @@ class RecipeDeletedState extends RecipeDetailsState {}
 
 class RecipeAddedToFavoritesState extends RecipeDetailsState {}
 
+class RecipeRemovedFromFavoritesState extends RecipeDetailsState {}
+
 class RecipeDetailsErrorState extends RecipeDetailsState {
   final String message;
 

@@ -27,7 +27,6 @@ class RecipeDetailsView extends StatelessWidget {
           }
         },
         builder: (context, state) {
-
           return Scaffold(
             extendBodyBehindAppBar: true,
             body: Stack(
@@ -89,9 +88,9 @@ class RecipeDetailsView extends StatelessWidget {
                       ),
                       InkWell(
                         onTap: () {
-                          context.read<RecipeDetailsCubit>().addToFavorites(
-                            recipe,
-                          );
+                          context
+                              .read<RecipeDetailsCubit>()
+                              .favoritesStatusChanged(recipe);
                         },
                         child: ClipRRect(
                           borderRadius: BorderRadius.circular(40),
@@ -103,11 +102,18 @@ class RecipeDetailsView extends StatelessWidget {
                                 shape: BoxShape.circle,
                                 color: Colors.black.withOpacity(0.35),
                               ),
-                              child: Icon(
-                                Icons.favorite_border,
-                                color: Colors.white,
-                                size: 22,
-                              ),
+                              child:
+                                  context.read<RecipeDetailsCubit>().isFavorite
+                                  ? Icon(
+                                      Icons.favorite,
+                                      color: ColorsManager.primaryColor,
+                                      size: 22,
+                                    )
+                                  : Icon(
+                                      Icons.favorite_border,
+                                      color: Colors.white,
+                                      size: 22,
+                                    ),
                             ),
                           ),
                         ),
@@ -268,13 +274,19 @@ class RecipeDetailsView extends StatelessWidget {
                               context,
                               MaterialPageRoute(
                                 builder: (_) => BlocProvider.value(
-                                  value: context.read<RecipeDetailsCubit>(),  // to use the same cubit instance
+                                  value: context
+                                      .read<
+                                        RecipeDetailsCubit
+                                      >(), // to use the same cubit instance
                                   child: EditRecipeView(recipe: recipe),
                                 ),
                               ),
                             );
                             if (result == true) {
-                              Navigator.pop(context, true);   // to indicate that the recipe was updated
+                              Navigator.pop(
+                                context,
+                                true,
+                              ); // to indicate that the recipe was updated
                             }
                           },
                           style: ElevatedButton.styleFrom(
