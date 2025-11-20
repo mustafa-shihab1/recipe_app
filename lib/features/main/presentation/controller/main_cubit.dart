@@ -1,9 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import '../../../../config/dependency_injection.dart';
 import '../../../../core/resources/assets_manager.dart';
-import '../../../MyRecipes/presentation/view/my_recipes_view.dart';
+import '../../../favorites/presentation/controller/favorites_cubit.dart';
+import '../../../myRecipes/presentation/view/my_recipes_view.dart';
 import '../../../favorites/presentation/view/favorites_view.dart';
 import '../../../home/presentation/view/home_view.dart';
+import '../../../profile/presentation/view/profile_view.dart';
 import 'main_state.dart';
 
 class MainCubit extends Cubit<MainState> {
@@ -13,7 +16,7 @@ class MainCubit extends Cubit<MainState> {
     const HomeView(),
     const FavoritesView(),
     const MyRecipesView(),
-    const Center(child: Text('Profile Page')),
+    const ProfileView(),
   ];
 
   final List<String> icons = <String>[
@@ -31,6 +34,9 @@ class MainCubit extends Cubit<MainState> {
   ];
 
   void changeBottomNav(int index) {
+    if(index == 1){
+      instance<FavoritesCubit>().getFavoriteRecipes();
+    }
     emit(MainTabChangedState(index));
   }
 

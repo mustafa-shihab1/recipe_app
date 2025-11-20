@@ -8,13 +8,13 @@ import '../../data/models/meal_model.dart';
 import 'home_state.dart';
 
 class HomeCubit extends Cubit<HomeState> {
-  HomeCubit(this.client) : super(HomeState());
+  HomeCubit(this.client) : super(InitialHomeState());
 
   final http.Client client;
 
   /// Get Random Meal
   Future<void> getRandomMeal() async {
-    emit(state.copyWith(randomMealStatus: RequestStatus.loading));
+    emit(LoadingRandomMealState());
 
     try {
       final response = await client.get(
@@ -29,33 +29,25 @@ class HomeCubit extends Cubit<HomeState> {
         if (mealList != null && mealList.isNotEmpty) {
           final randomMeal = MealModel.fromJson(mealList.first);
 
-          emit(state.copyWith(
-            randomMealStatus: RequestStatus.success,
-            randomMeal: randomMeal,
-          ));
+          emit(LoadedRandomMealState(randomMeal));
         } else {
-          emit(state.copyWith(
-            randomMealStatus: RequestStatus.error,
-            errorMessage: "No meal found.",
-          ));
+          emit(ErrorRandomMealState('No meal found!'));
         }
       } else {
-        emit(state.copyWith(
-          randomMealStatus: RequestStatus.error,
-          errorMessage: 'Failed to load recipe (Error: ${response.statusCode})',
-        ));
+        emit(
+          ErrorRandomMealState(
+            'Failed to load recipe (Error: ${response.statusCode})',
+          ),
+        );
       }
-    } catch (e) {
-      emit(state.copyWith(
-        randomMealStatus: RequestStatus.error,
-        errorMessage: "An error occurred: $e",
-      ));
+    } catch (error) {
+      emit(ErrorRandomMealState('An error occurred: $error'));
     }
   }
 
   /// Get Categories
   Future<void> getCategories() async {
-    emit(state.copyWith(categoriesStatus: RequestStatus.loading));
+    emit(LoadingCategoriesState());
 
     try {
       final response = await client.get(
@@ -71,21 +63,18 @@ class HomeCubit extends Cubit<HomeState> {
             .map((jsonCategory) => CategoryModel.fromJson(jsonCategory))
             .toList();
 
-        emit(state.copyWith(
-          categoriesStatus: RequestStatus.success,
-          categories: categories,
-        ));
+        emit(LoadedCategoriesState(categories));
       } else {
-        emit(state.copyWith(
-          categoriesStatus: RequestStatus.error,
-          errorMessage: 'Failed to load categories (Error: ${response.statusCode})',
-        ));
+        emit(
+          ErrorCategoriesState(
+            'Failed to load categories (Error: ${response.statusCode})',
+          ),
+        );
       }
     } catch (e) {
-      emit(state.copyWith(
-        categoriesStatus: RequestStatus.error,
-        errorMessage: "An error occurred while fetching categories: $e",
-      ));
+      emit(
+        ErrorCategoriesState("An error occurred while fetching categories: $e"),
+      );
     }
   }
 }

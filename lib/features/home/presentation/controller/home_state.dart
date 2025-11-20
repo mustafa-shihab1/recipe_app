@@ -1,38 +1,30 @@
 import '../../data/models/category_model.dart';
 import '../../data/models/meal_model.dart';
 
-enum RequestStatus { initial, loading, success, error }
+abstract class HomeState {}
 
-class HomeState {
-  final RequestStatus randomMealStatus;
-  final MealModel? randomMeal;
+class InitialHomeState extends HomeState {}
 
-  final RequestStatus categoriesStatus;
-  final List<CategoryModel>? categories;
+class LoadingRandomMealState extends HomeState {}
 
-  final String? errorMessage;
+class LoadedRandomMealState extends HomeState {
+  MealModel meal;
+  LoadedRandomMealState(this.meal);
+}
 
-  HomeState({
-    this.randomMealStatus = RequestStatus.initial,
-    this.randomMeal,
-    this.categoriesStatus = RequestStatus.initial,
-    this.categories,
-    this.errorMessage,
-  });
+class ErrorRandomMealState extends HomeState {
+  final String message;
+  ErrorRandomMealState(this.message);
+}
 
-  HomeState copyWith({
-    RequestStatus? randomMealStatus,
-    MealModel? randomMeal,
-    RequestStatus? categoriesStatus,
-    List<CategoryModel>? categories,
-    String? errorMessage,
-  }) {
-    return HomeState(
-      randomMealStatus: randomMealStatus ?? this.randomMealStatus,
-      randomMeal: randomMeal ?? this.randomMeal,
-      categoriesStatus: categoriesStatus ?? this.categoriesStatus,
-      categories: categories ?? this.categories,
-      errorMessage: errorMessage ?? this.errorMessage,
-    );
-  }
+class LoadingCategoriesState extends HomeState {}
+
+class LoadedCategoriesState extends HomeState {
+  List<CategoryModel> categories;
+  LoadedCategoriesState(this.categories);
+}
+
+class ErrorCategoriesState extends HomeState {
+  final String message;
+  ErrorCategoriesState(this.message);
 }
