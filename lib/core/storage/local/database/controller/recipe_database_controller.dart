@@ -25,6 +25,17 @@ class RecipeDatabaseController {
     return recipes;
   }
 
+  Future<Recipe?> getRecipeById(int id) async {
+    var result = await database!.rawQuery(
+      'SELECT * FROM ${SqfLiteConstants.tableName} WHERE ${SqfLiteConstants.columnId} = ?',
+      [id],
+    );
+    if (result.isNotEmpty) {
+      return Recipe.fromMap(result.first);
+    }
+    return null;
+  }
+
   Future<int> updateRecipeFromDb(Recipe recipe) async {
     int result = await database!.rawUpdate(
       'UPDATE ${SqfLiteConstants.tableName} SET ${SqfLiteConstants.columnName} = "${recipe.name}", ${SqfLiteConstants.columnCategory} = "${recipe.category}", ${SqfLiteConstants.columnArea} = "${recipe.area}", ${SqfLiteConstants.columnInstructions} = "${recipe.instructions}", ${SqfLiteConstants.columnImage} = "${recipe.imagePath}", ${SqfLiteConstants.columnIsFavorite} = "${recipe.isFavorite}" WHERE ${SqfLiteConstants.columnId} = ${recipe.id}',

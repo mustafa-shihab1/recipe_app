@@ -18,6 +18,20 @@ class RecipeDetailsCubit extends Cubit<RecipeDetailsState> {
   bool isFavorite = false;
   XFile? recipePickedImage;
 
+  void init(Recipe recipe) {
+    isFavorite = recipe.isFavorite;
+    _checkFavoriteStatus(recipe.id);
+  }
+
+  Future<void> _checkFavoriteStatus(int? id) async {
+    if (id == null) return;
+    final recipe = await _recipeDatabaseController.getRecipeById(id);
+    if (recipe != null && recipe.isFavorite != isFavorite) {
+      isFavorite = recipe.isFavorite;
+      emit(RecipeUpdatedState(recipe));
+    }
+  }
+
   Future<void> pickRecipeImage() async {
     recipePickedImage = await ImagePicker().pickImage(
       source: ImageSource.gallery,

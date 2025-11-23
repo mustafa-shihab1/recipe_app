@@ -19,7 +19,7 @@ class RecipeDetailsView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return BlocProvider(
-      create: (context) => instance<RecipeDetailsCubit>(),
+      create: (context) => instance<RecipeDetailsCubit>()..init(recipe),
       child: BlocConsumer<RecipeDetailsCubit, RecipeDetailsState>(
         listener: (context, state) {
           if (state is RecipeUpdatedState) {
